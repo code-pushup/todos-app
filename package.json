@@ -2,7 +2,9 @@
   "name": "todo-app",
   "scripts": {
     "start": "esbuild src/index.jsx --bundle --outdir=www/js --servedir=www",
-    "build": "esbuild src/index.jsx --bundle --outdir=www/js --minify"
+    "build": "esbuild src/index.jsx --bundle --outdir=www/js --minify",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage.enabled"
   },
   "dependencies": {
     "moment": "^2.29.4",
@@ -10,6 +12,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "esbuild": "^0.19.2"
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@vitest/coverage-v8": "^3.1.2",
+    "esbuild": "^0.19.2",
+    "jsdom": "^26.1.0",
+    "vitest": "^3.1.2"
   }
 }
