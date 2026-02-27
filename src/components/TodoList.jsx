@@ -4,7 +4,7 @@ import { fromNow } from '../utils';
 const TodoList = props => (
   <ul>
     {props.todos.map(todo => (
-      <li>
+      <li key={todo.id}>
         <label>
           <input
             type="checkbox"
@@ -23,7 +23,7 @@ const TodoList = props => (
           >
             {todo.title}
           </span>
-          {todo.dueDate && <b> - due {fromNow(dueDate)}</b>}
+          {todo.dueDate && <b> - due {fromNow(todo.dueDate)}</b>}
         </label>
       </li>
     ))}
