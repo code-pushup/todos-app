@@ -1,5 +1,5 @@
-import moment from 'moment';
 import React from 'react';
+import { fromNow } from '../utils';
 
 const TodoList = props => (
   <ul>
@@ -23,7 +23,7 @@ const TodoList = props => (
           >
             {todo.title}
           </span>
-          {todo.dueDate && <b> - due {moment(todo.dueDate).fromNow()}</b>}
+          {todo.dueDate && <b> - due {fromNow(dueDate)}</b>}
         </label>
       </li>
     ))}
