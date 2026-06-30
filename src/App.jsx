@@ -5,8 +5,7 @@ import TodoList from './components/TodoList';
 import { useTodos } from './hooks/useTodos';
 
 const App = () => {
-  const { loading, todos, onCreate, onEdit, setQuery, setHideComplete } =
-    useTodos();
+  const { todos, onCreate, onEdit, setQuery, setHideComplete } = useTodos();
 
   return (
     <div>
