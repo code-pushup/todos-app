@@ -4,7 +4,7 @@ import React from 'react';
 const TodoList = props => (
   <ul>
     {props.todos.map(todo => (
-      <li>
+      <li key={todo.id}>
         <label>
           <input
             type="checkbox"
