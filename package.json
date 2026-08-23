@@ -1,10 +1,11 @@
 {
   "name": "todo-app",
   "scripts": {
-    "start": "esbuild src/app.jsx --bundle --outdir=www/js --servedir=www",
-    "build": "esbuild src/app.jsx --bundle --outdir=www/js --minify"
+    "start": "esbuild src/index.jsx --bundle --outdir=www/js --servedir=www",
+    "build": "esbuild src/index.jsx --bundle --outdir=www/js --minify"
   },
   "dependencies": {
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
