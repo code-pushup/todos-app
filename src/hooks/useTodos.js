@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useTodosFilter } from './useTodosFilter';
 
 export const useTodos = () => {
   const [loading, setLoading] = useState(false);
@@ -8,15 +9,15 @@ export const useTodos = () => {
     setLoading(true);
     fetch('https://jsonplaceholder.typicode.com/todos')
       .then(resp => resp.json())
-      .then(data => {
-        setData(data);
+      .then(respData => {
+        setData(respData);
         setLoading(false);
       });
   }, []);
 
   const onCreate = useCallback(title => {
     const body = JSON.stringify({
-      title: title,
+      title,
       complete: false,
     });
 
@@ -26,41 +27,19 @@ export const useTodos = () => {
     })
       .then(resp => resp.json())
       .then(({ id }) => {
-        setData(data => [
-          ...data,
-          {
-            id: id,
-            title: title,
-            complete: false,
-          },
-        ]);
+        setData(arr => [...arr, { id, title, complete: false }]);
       });
-  });
+  }, []);
 
   const onEdit = useCallback(todo => {
-    setData(data => data.map(t => (t.id == todo.id ? todo : t)));
+    setData(arr => arr.map(t => (t.id === todo.id ? todo : t)));
     fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
       method: 'PUT',
       body: JSON.stringify(todo),
     });
-  });
+  }, []);
 
-  const [query, setQuery] = useState('');
-  const [hideComplete, setHideComplete] = useState(false);
-
-  const todos = useMemo(
-    () =>
-      data.filter(todo => {
-        if (query && !todo.title.toLowerCase().includes(query.toLowerCase())) {
-          return false;
-        }
-        if (hideComplete && todo.complete) {
-          return false;
-        }
-        return true;
-      }),
-    [data, query, hideComplete]
-  );
+  const { todos, setQuery, setHideComplete } = useTodosFilter(data);
 
   return {
     loading,
